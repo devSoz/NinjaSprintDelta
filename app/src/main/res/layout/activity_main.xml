@@ -1,18 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/rel12"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/backgnd"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgnd"
+        android:orientation="vertical"       >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgnd"
+            android:orientation="horizontal"       >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:gravity="start"
+                    android:background="@color/backgnd"
+                    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/pong" />
+                    <Button
+                        android:id="@+id/btnnew"
+                        style="@style/CustomButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="New Game" />
+
+                    <Button
+
+                        style="@style/CustomButtonStyle"
+                         android:id="@+id/btnhelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Help" />
+                  <Switch
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                    android:id="@+id/switch1"
+                      android:layout_gravity="center"
+                      android:layout_margin="20dp"
+
+                      style="@style/titletxt1"
+                      android:text="Volume">
+
+                  </Switch>
+
+
+
+                </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/backgnd"
+            android:layout_weight="1" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/rectround1"
+                android:layout_weight="1" >
+            <TextView
+                android:id="@+id/txtScore"
+                style="@style/titletxt3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:text="Leader board" />
+            <TextView
+                android:id="@+id/txtScore1"
+                style="@style/titletxt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="" />
+            <TextView
+                android:id="@+id/txtScore2"
+                style="@style/titletxt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                   android:text="" />
+            <TextView
+                android:id="@+id/txtScore3"
+                style="@style/titletxt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="" />
+            <TextView
+                android:id="@+id/txtScore4"
+                style="@style/titletxt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="" />
+                <TextView
+                    android:id="@+id/txtScore5"
+                    style="@style/titletxt1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+                 <LinearLayout
+                    android:id="@+id/rglinear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/backgnd"
+                    android:paddingTop="5dp"
+                    android:gravity="top"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:layout_weight="3"
+                    >
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/footertxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:text="Made by Dp"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

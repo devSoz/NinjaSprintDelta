@@ -17,10 +17,11 @@
     <color name="btn">#B0C4DE</color>
     <color name="clr1">#FF015E</color>
     <color name="clr2">#006A02</color>
-    <color name="ball">#00FFF7</color>
-    <color name="clrWall1">#F69AB9</color>
-    <color name="clrWall2">#EB3674</color>
-    <color name="clrWall3">#EB51D9</color>
+    <color name="Ninja">#00FFF7</color>
+    <color name="Ninja2">#829F9E</color>
+    <color name="clrSal1">#F69AB9</color>
+    <color name="clrSal2">#EB3674</color>
+    <color name="clrSal3">#EB51D9</color>
     <color name="popup">#6B888C</color>
     <color name="maintheme">#F0D3A0A0</color>
     <color name="button_general_color">#8EA8AB</color>
