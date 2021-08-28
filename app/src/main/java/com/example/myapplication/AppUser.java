@@ -44,7 +44,7 @@ public class AppUser implements Serializable {
 
     public AppUser() {}
 
-    public AppUser(String uid, String name, String email, String imageUrl, Boolean istyping, Boolean isNew)
+    public AppUser(String uid, String name, String email, Boolean isNew)
     {
         this.uid = uid;
         this.name = name;

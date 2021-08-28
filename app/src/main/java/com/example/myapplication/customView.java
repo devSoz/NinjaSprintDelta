@@ -228,7 +228,7 @@ public class customView extends View {
                // mCanvas.drawCircle(ninjaObj.x - ninjaObj.radius, ninjaObj.y - ninjaObj.radius, ninjaObj.radius, paintNinja);
             } else {
                 if (salObj.rSal.contains(ninjaObj.x + ninjaObj.radius, ninjaObj.y) || (salObj2.rSal.contains(ninjaObj.x + ninjaObj.radius, ninjaObj.y))) {
-                  //  gameEnd();
+                    gameEnd();
                 }
                 mCanvas.drawBitmap(ninjaObj.bmpNinja, ninjaObj.x, ninjaObj.y, paintSal);
             }
@@ -289,14 +289,14 @@ public class customView extends View {
         //if(salObj.rSal.contains((ninjaObj.x+ninjaObj.radius), (ninjaObj.y)+ninjaObj.radius))
         if (NinjaHit(salObj) || NinjaHit(salObj2)) {
             flagGameOver = 1;
-            //flagEnd=1;
+            flagEnd=1;
             gameEnd();
         }
         if (ninjaObj.y <= (yCanvas / 5)) {
             flagUp = 0;
         }
         if (flagUp == 0) {
-            if ((ninjaObj.y + ninjaObj.radius) >= yBottom) {
+            if ((ninjaObj.y + ninjaObj.radius) >= (yBottom-ninjaObj.radius)) {
                 if (flagUpClick == 1)
                     flagClick = 0;
                 flagUp = 1;
@@ -508,8 +508,8 @@ public class customView extends View {
         double distance = Math.pow((cX - Sal.width / 2), 2) + Math.pow((cY - Sal.height / 2), 2);
         if ((salObj.rSal.contains(ninjaObj.x - ninjaObj.radius, ninjaObj.y + ninjaObj.radius)) || (salObj2.rSal.contains(ninjaObj.x - ninjaObj.radius, ninjaObj.y + ninjaObj.radius)))
             return true;
-        //if((salObj2.rSal.contains(ninjaObj.x+ninjaObj.radius, ninjaObj.y))||(salObj2.rSal.contains(ninjaObj.x, ninjaObj.y+ninjaObj.radius)))
-        // return true;
+        if((salObj2.rSal.contains(ninjaObj.x+ninjaObj.radius, ninjaObj.y))||(salObj2.rSal.contains(ninjaObj.x, ninjaObj.y+ninjaObj.radius)))
+         return true;
 
         return (distance <= (Math.pow(ninjaObj.radius, 2)));
         //return false;
@@ -534,8 +534,8 @@ public class customView extends View {
         paint.setTextSize(50);
 
 
-        mCanvas.drawText(String.valueOf(ninjaObj.x), 200, 200, paint);
-        mCanvas.drawText(String.valueOf(ninjaObj.y), 100, 300, paint);
+       // mCanvas.drawText(String.valueOf(ninjaObj.x), 200, 200, paint);
+      //  mCanvas.drawText(String.valueOf(ninjaObj.y), 100, 300, paint);
 
        // if (x == 1)
             Log.d("debugcanvas game over", String.valueOf(ninjaObj.x) + " ," + String.valueOf(ninjaObj.y));

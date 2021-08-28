@@ -70,7 +70,7 @@ public class AuthenticateUser extends AppCompatActivity {
         List<AppUser> userList = new ArrayList<AppUser>();
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -103,7 +103,7 @@ public class AuthenticateUser extends AppCompatActivity {
             initGoogleSignInClient();
             firebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
-            databaseReference = firebaseDatabase.getReference("users");
+            databaseReference = firebaseDatabase.getReference("Users");
             authStateListener = new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -128,7 +128,7 @@ public class AuthenticateUser extends AppCompatActivity {
     private void initGoogleSignInClient() {
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            //    .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.default_web_client_id))
                 //.requestIdToken("71669961602-am7bmcfmbtp54tpfpa76bmn1lef1tqb4.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
@@ -174,7 +174,7 @@ public class AuthenticateUser extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
                         Log.d("test", "signInWithCredential:onComplete:" + task.isSuccessful());
-                        userDbRef = firebaseDatabase.getReference("users");
+                        userDbRef = firebaseDatabase.getReference("Users");
                         //Query userQuery = userDbRef.get
 
                         if(task.isSuccessful())
@@ -184,8 +184,12 @@ public class AuthenticateUser extends AppCompatActivity {
 
                             flagNewUser = 1;
                             //
+
                             // Query qry= firebaseDatabase.getReference("users").orderByChild("uid").equalTo("VW4yYHQyi1Wkw6af04dbpAnRI1w2");
-                            databaseReference=FirebaseDatabase.getInstance().getReference("users");
+                            databaseReference=FirebaseDatabase.getInstance().getReference("Users");
+                            AppUser user = new AppUser(firebaseUser.getUid(), "test", "test@test.com", isNewUser);
+
+                            databaseReference.child(myuid).setValue(user);
                             databaseReference.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot)
@@ -197,12 +201,11 @@ public class AuthenticateUser extends AppCompatActivity {
 
                                         String name = firebaseUser.getDisplayName();
                                         String email = firebaseUser.getEmail();
-                                        String imageUrl = "gs://my-buddy-c3898.appspot.com/ChatImages/post1630077330561";
-                                        Boolean typing = false;
-                                        AppUser user = new AppUser(myuid, name, email, imageUrl, typing, isNewUser);
+
+                                        AppUser user = new AppUser(myuid, name, email, isNewUser);
                                         //user.isNew = isNewUser;
 
-                                        databaseReference = firebaseDatabase.getReference("users");
+                                        databaseReference = firebaseDatabase.getReference("Users");
                                         //databaseReference.push().setValue(user);
                                         databaseReference.child(myuid).setValue(user);
                                         //  storeUserData(myuid,name,imageUrl);
@@ -268,34 +271,7 @@ public class AuthenticateUser extends AppCompatActivity {
 
 
     }
-    public void getData()
-    {
-        flagNewUser = 1;
-        databaseReference = firebaseDatabase.getReference("users").child("MhO7JOPKvYvzEyeRzrT");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
-                //for(DataSnapshot snapshot1 : snapshot.getChildren())
-                //{
-                //user user1= snapshot1.getValue(user.class);
-                //if(!( user1.name == null))
-                // showToast(user1.name);
-                if(!snapshot.exists())
-                {
-                    flagNewUser = 0;
-                }
-                //}
-                //String t = snapshot.getValue(String.class);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error)
-            {
-
-            }
-        });
-    }
 
     private void createNewUser(AppUser authenticatedUser) {
        /* authViewModel.createUser(authenticatedUser);
