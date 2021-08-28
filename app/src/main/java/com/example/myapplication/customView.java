@@ -168,7 +168,7 @@ public class customView extends View {
             mCanvas.drawText(String.valueOf("Click any key to start!"), xCanvas / 3, yCanvas / 3, paintLine);
         }
 
-        if (secondsPassed % 40 == 0) {
+        if (secondsPassed % 60000== 0) {
             speedReset();
         }
         if (flagStart == 1) {
@@ -178,7 +178,7 @@ public class customView extends View {
                 ninjaObj = new Ninja(xCanvas, yCanvas);
                 //   salObj2 = new Sal(xCanvas, yCanvas);
             }
-            mCanvas.drawRect(salObj2.rSal, paintSal);
+            //mCanvas.drawRect(salObj2.rSal, paintSal);
 
             mCustomImage = getResources().getDrawable(R.drawable.fsal);
             //mCustomImage.setBounds(100, 200, 200, 100);
@@ -197,11 +197,12 @@ public class customView extends View {
 
             int width = bitmap.getWidth();
             int height = bitmap.getHeight();
-            int w = width / 10;
+            int w = width / 12;
             salObj.rSal.round(rect);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, w, height);
             mCanvas.drawBitmap(bitmap, rect.left, rect.top, paintSal);
-
+            salObj2.rSal.round(rect);
+            mCanvas.drawBitmap(bitmap, rect.left, rect.top, paintSal);
             debugCanvas(0);
             ////Ninja
             if (cntNinja > 4)
@@ -220,21 +221,22 @@ public class customView extends View {
 
             paintNinja.setStyle(Paint.Style.FILL_AND_STROKE);
             paintNinja.setColor(getResources().getColor(R.color.Ninja));
+            //mCanvas.drawBitmap(ninjaObj.bmpNinja, ninjaObj.x, ninjaObj.y, paintSal);
             if (flagClick == 1) {
                 moveNinja();
                 mCanvas.drawBitmap(ninjaObj.bmpNinja, ninjaObj.x, ninjaObj.y, paintSal);
                // mCanvas.drawCircle(ninjaObj.x - ninjaObj.radius, ninjaObj.y - ninjaObj.radius, ninjaObj.radius, paintNinja);
             } else {
-                //if (salObj.rSal.contains(ninjaObj.x + ninjaObj.radius, ninjaObj.y) || (salObj2.rSal.contains(ninjaObj.x + ninjaObj.radius, ninjaObj.y))) {
+                if (salObj.rSal.contains(ninjaObj.x + ninjaObj.radius, ninjaObj.y) || (salObj2.rSal.contains(ninjaObj.x + ninjaObj.radius, ninjaObj.y))) {
                   //  gameEnd();
-                //}
-                //  mCanvas.drawCircle(ninjaObj.x, ninjaObj.y, ninjaObj.radius, paintNinja);
+                }
+                mCanvas.drawBitmap(ninjaObj.bmpNinja, ninjaObj.x, ninjaObj.y, paintSal);
             }
             paintLine.setColor(getResources().getColor(R.color.clrGameLine));
             paintLine.setStyle(Paint.Style.STROKE);
             paintLine.setStrokeWidth(5f);
             setTimer();
-            mCanvas.drawText(String.format("%02d", min) + ":" + String.format("%02d", sec) + "      Score : " + String.format("%.1f", secondsPassed * 0.1), (xCanvas - xCanvas / 3.0f), 50, paintLine);
+            mCanvas.drawText(String.format("%02d", min) + ":" + String.format("%02d", sec) + "      Score : " + "100",(xCanvas - xCanvas / 3.0f), 50, paintLine);//String.format("%.1f", secondsPassed * 0.1), (xCanvas - xCanvas / 3.0f), 50, paintLine);
         }
 
         paintLine.setColor(getResources().getColor(R.color.clrGameLine));
@@ -258,11 +260,13 @@ public class customView extends View {
             }
 
             case MotionEvent.ACTION_MOVE: {
-                if (isInside(joyObj.x, joyObj.y, joyObj.radius, xTouch, yTouch)) {
-                    flagClick = 1;
 
+                if(flagClick==0) {
+                    if (isInside(joyObj.x, joyObj.y, joyObj.radius, xTouch, yTouch)) {
+                        flagClick = 1;
+                    }
                 }
-
+                //flagClick = 1;
                 if ((insideCircle(joyObj.xInitial, joyObj.yInitial, joyObj.x, joyObj.y, joyObj.radius*3, joyObj.radius)) && (flagClick == 1)) {
                     joyObj.x = xTouch;
                     joyObj.y = yTouch;
@@ -352,7 +356,7 @@ public class customView extends View {
         public Ninja(Float xCanvas, Float yCanvas) {
             this.radius = 50;
             this.x = xCanvas/6;
-            this.y = yBottom - this.radius;
+            this.y = yBottom - 2*this.radius-100;
 
             Drawable dr = getResources().getDrawable(R.drawable.run);
 
@@ -484,7 +488,7 @@ public class customView extends View {
     }
 
     private Boolean NinjaHit(Sal Sal) {
-       /* Float cX = Math.abs(ninjaObj.x - Sal.rSal.left);
+        Float cX = Math.abs(ninjaObj.x - Sal.rSal.left);
         Float cY = Math.abs(ninjaObj.y - Sal.rSal.top);
 
         if (cX > (Sal.width / 2 + ninjaObj.radius)) {
@@ -507,8 +511,8 @@ public class customView extends View {
         //if((salObj2.rSal.contains(ninjaObj.x+ninjaObj.radius, ninjaObj.y))||(salObj2.rSal.contains(ninjaObj.x, ninjaObj.y+ninjaObj.radius)))
         // return true;
 
-        return (distance <= (Math.pow(ninjaObj.radius, 2)));*/
-        return false;
+        return (distance <= (Math.pow(ninjaObj.radius, 2)));
+        //return false;
     }
 
     public void gameEnd() {
@@ -534,7 +538,7 @@ public class customView extends View {
         mCanvas.drawText(String.valueOf(ninjaObj.y), 100, 300, paint);
 
        // if (x == 1)
-            Log.d("debugcanvas game over", String.valueOf(joyObj.x) + " ," + String.valueOf(joyObj.y));
+            Log.d("debugcanvas game over", String.valueOf(ninjaObj.x) + " ," + String.valueOf(ninjaObj.y));
         //else
           //  Log.d("debugcanvas", String.valueOf(ninjaObj.x) + " ," + String.valueOf(ninjaObj.y) + " ," + String.valueOf(ninjaObj.radius));
 
